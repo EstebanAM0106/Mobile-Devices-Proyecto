@@ -6,6 +6,7 @@ CREATE TABLE Planta
   Altura INT NOT NULL,
   Diametro INT NOT NULL,
   Descripcion VARCHAR(300) NOT NULL,
+  Favorito BIT NOT NULL,
   URL_imagen VARCHAR(150) NOT NULL,
   PRIMARY KEY (ID_planta)
 );
