@@ -54,6 +54,7 @@ public class InformacionPlantaFragment extends Fragment {
     public void inicializarElementos(View view, int idPlanta,Context context) {
         ImageView imgPlanta = (ImageView) view.findViewById(R.id.infImgId);
         TextView txtNombre = (TextView) view.findViewById(R.id.infNombre);
+
         CargarBaseDatosInformacion bd =  new CargarBaseDatosInformacion(idPlanta,context,view,imgPlanta,txtNombre);
 
 
@@ -75,7 +76,7 @@ public class InformacionPlantaFragment extends Fragment {
 
     }
 
-    public static void cargar(PlantasInformacion plantasInformacion, Context context, View view, ImageView imgPlanta, TextView txtNombre,Button btnModificar){
+    public static void cargar(PlantasInformacion plantasInformacion, Context context, View view, ImageView imgPlanta, TextView txtNombre){
 
         //Toast.makeText(context,"cargar "+plantaId, Toast.LENGTH_SHORT).show();
         //Toast.makeText(context,"encargar", Toast.LENGTH_SHORT).show();
