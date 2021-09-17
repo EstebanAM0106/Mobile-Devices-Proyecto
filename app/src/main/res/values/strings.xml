@@ -41,6 +41,4 @@
     <string name="default_descricpión">Esta especie proviende de...</string>
     <string name="valor">1</string>
     <string name="unidad">Unidad</string>
-    <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

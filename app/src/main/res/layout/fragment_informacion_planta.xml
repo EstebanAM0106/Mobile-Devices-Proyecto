@@ -35,6 +35,13 @@
                             android:src="@drawable/ic_launcher_background"
                             tools:ignore="ImageContrastCheck" />
 
+                        <Button
+                            android:id="@+id/infBtnActualizar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            tools:ignore="SpeakableTextPresentCheck" />
+
                         <TextView
                             android:id="@+id/infNombre"
                             android:layout_width="match_parent"
@@ -316,7 +323,7 @@
                                     android:textStyle="bold" />
 
                                 <TextView
-                                    android:id="@+id/infCicloRiedo"
+                                    android:id="@+id/infCicloRiego"
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
@@ -444,6 +451,7 @@
                             android:textStyle="italic" />
 
                 </LinearLayout>
+
 
         </LinearLayout>
 </ScrollView>

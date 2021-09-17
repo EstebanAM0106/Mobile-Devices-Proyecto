@@ -12,20 +12,23 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
+import mx.ipn.escom.plantas.Database.Database;
 import mx.ipn.escom.plantas.ui.inicio.InicioFragment;
 
 public class CargarBaseDatosInicio {
 
     private Connection connection;
 
+    private Database db = new Database();
     // private final String host = "ssprojectinstance.csv2nbvvgbcb.us-east-2.rds.amazonaws.com"  // For Amazon Postgresql
-    private final String host = "192.168.0.106";  // For Google Cloud Postgresql
-    private final String database = "plantas";
-    private final int port = 5432;
-    private final String user = "postgres";
-    private final String pass = "admin123";
+    private final String host = db.getHost();  // For Google Cloud Postgresql
+    private final String database = db.getDatabase();
+    private final int port = db.getPort();
+    private final String user =db.getUser();
+    private final String pass = db.getPass();
     private String url = "jdbc:postgresql://%s:%d/%s";
     private boolean status;
+
 
     private Context context;
     private RecyclerView recyclerView;
