@@ -13,11 +13,12 @@ import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import java.util.Collections;
 import java.util.List;
 
-import mx.ipn.escom.plantas.Database.CargarBaseDatosInicio;
 import mx.ipn.escom.plantas.Adapter.Plantas;
 import mx.ipn.escom.plantas.Adapter.PlantasAdapter;
+import mx.ipn.escom.plantas.Database.CargarBaseDatosInicio;
 import mx.ipn.escom.plantas.R;
 import mx.ipn.escom.plantas.databinding.FragmentInicioBinding;
 import mx.ipn.escom.plantas.ui.informacion.InformacionActivity;
@@ -65,6 +66,7 @@ public class InicioFragment extends Fragment {
 
     }
     public static void cargar(List<Plantas> plantasList, Context context, RecyclerView recyclerPlantas){
+        Collections.shuffle(plantasList);
         PlantasAdapter plantasAdapter = new PlantasAdapter(plantasList,context);
         recyclerPlantas.setAdapter(plantasAdapter);
     }

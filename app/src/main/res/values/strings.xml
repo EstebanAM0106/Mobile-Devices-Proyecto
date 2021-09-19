@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Plantas</string>
+    <string name="app_name">PlantBU</string>
     <string name="title_inicio">Inicio</string>
     <string name="title_favoritos">Mis plantas</string>
     <string name="title_busqueda">Buscar</string>
