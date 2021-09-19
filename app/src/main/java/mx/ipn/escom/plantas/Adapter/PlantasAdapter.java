@@ -43,7 +43,7 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.ViewHold
     public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String nombreTemp = plantasList.get(position).getNombre();
         String nombreAltTemp = plantasList.get(position).getNombreAlt();
-        if(nombreAltTemp == "" || nombreAltTemp == " "|| nombreAltTemp == null) {
+        if(nombreAltTemp.length()<=4) {
             holder.txtNombre.setText(nombreTemp);
         }else {
 

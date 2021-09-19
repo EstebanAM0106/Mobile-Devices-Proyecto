@@ -1,11 +1,11 @@
 package mx.ipn.escom.plantas.Database;
 
 public class Database {
-    private String host = "192.168.0.106";
+    private String host = "143.244.211.88";
     private int port = 5432;
     private String database = "plantas";
     private String user = "postgres";
-    private String pass = "admin123";
+    private String pass = "admin875";
 
     public Database(String host, int port, String database, String user, String pass) {
         this.host = host;

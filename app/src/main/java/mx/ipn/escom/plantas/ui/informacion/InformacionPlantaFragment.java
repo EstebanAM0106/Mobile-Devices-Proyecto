@@ -138,7 +138,7 @@ public class InformacionPlantaFragment extends Fragment  implements View.OnClick
                               TextView txtDescripcion,
                               TextView txtUltimoCambio,
                               String ultimoUsuarioNombre) {
-        if(plantasInformacion.getNombreAlt() == "" || plantasInformacion.getNombreAlt() == " " || plantasInformacion.getNombreAlt() == null)
+        if(plantasInformacion.getNombreAlt().length()<=4)
         {
             txtNombre.setText(plantasInformacion.getNombre());
         }else{

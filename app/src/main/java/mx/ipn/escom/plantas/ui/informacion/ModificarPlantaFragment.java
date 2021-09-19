@@ -144,6 +144,7 @@ public class ModificarPlantaFragment extends Fragment implements View.OnClickLis
         rbtLuz.setOnClickListener(this);
         rbtMediaSombra.setOnClickListener(this);
         rbtSombra.setOnClickListener(this);
+        edtReino.setText("Plantae");
         btnGuardar = (Button) root.findViewById(R.id.modBtnGuardar);
         btnGuardar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -172,35 +173,35 @@ public class ModificarPlantaFragment extends Fragment implements View.OnClickLis
                 String descripcion = (String) edtDescripcion.getText().toString()+"";
                 int ultimoUsuario = 1;
 
-                if(nombre==""||nombre==" ")
+                if(nombre.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.nombre)+"\n";
-                if(imagenURL=="" ||imagenURL==" ")
+                if(imagenURL.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.url_imagen)+"\n";
-                if(reino=="" ||reino==" ")
+                if(reino.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.reino)+"\n";
-                if(division=="" ||division==" ")
+                if(division.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.division)+"\n";
-                if(clase=="" ||clase==" ")
+                if(clase.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.clase)+"\n";
-                if(orden=="" ||orden==" ")
+                if(orden.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.orden)+"\n";
-                if(familia=="" ||familia==" ")
+                if(familia.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.familia)+"\n";
-                if(genero=="" ||genero==" ")
+                if(genero.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.genero)+"\n";
-                if(especie=="" ||especie==" ")
+                if(especie.length()<=3)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.nombre_alternativo)+"\n";
                 if(altura<=0)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.altura)+"\n";
-                if(alturaUnidad=="" ||alturaUnidad==" ")
+                if(alturaUnidad.length()<=0 ||alturaUnidad==" ")
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.altura)+" "+getResources().getText(R.string.unidad)+"\n";
                 if(diametro<=0)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.diametro)+"\n";
-                if(diametroUnidad=="" ||diametroUnidad==" ")
+                if(diametroUnidad.length()<=0 ||diametroUnidad==" ")
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.diametro)+" "+getResources().getText(R.string.unidad)+"\n";
                 if(cicloRiego<=0)
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.ciclo_riego)+"\n";
-                if(cicloRiegoUnidad=="" ||cicloRiegoUnidad==" ")
+                if(cicloRiegoUnidad.length()<=0 ||cicloRiegoUnidad==" ")
                     errors += getResources().getText(R.string.completar_campo)+" "+ getResources().getText(R.string.ciclo_riego)+" "+getResources().getText(R.string.unidad)+"\n";
 
                 if(idPlanta >= 0) {
