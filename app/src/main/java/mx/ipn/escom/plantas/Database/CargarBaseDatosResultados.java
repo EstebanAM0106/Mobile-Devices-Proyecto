@@ -1,4 +1,4 @@
-package mx.ipn.escom.plantas.Adapter;
+package mx.ipn.escom.plantas.Database;
 
 
 import android.content.Context;
@@ -12,7 +12,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import mx.ipn.escom.plantas.Database.Database;
+import mx.ipn.escom.plantas.Adapter.Plantas;
 import mx.ipn.escom.plantas.ui.resultados.ResultadosActivity;
 
 public class CargarBaseDatosResultados {

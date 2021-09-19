@@ -1,23 +1,22 @@
-package mx.ipn.escom.plantas.Adapter;
+package mx.ipn.escom.plantas.Database;
 
 
 import android.content.Context;
+import android.content.res.Resources;
 import android.view.View;
-import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
-import android.widget.TextView;
-
-import com.bumptech.glide.RequestManager;
+import android.widget.RadioButton;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.Statement;
 
-import mx.ipn.escom.plantas.Database.Database;
-import mx.ipn.escom.plantas.ui.informacion.InformacionPlantaFragment;
+import mx.ipn.escom.plantas.Adapter.PlantasInformacion;
+import mx.ipn.escom.plantas.ui.informacion.ModificarPlantaFragment;
 
-public class CargarBaseDatosInformacion {
+public class CargarBaseDatosModificar {
 
     private Connection connection;
     private Database db = new Database();
@@ -34,52 +33,63 @@ public class CargarBaseDatosInformacion {
     private int plantaId;
     private Context context;
     private View view;
+    private Resources resource;
     private ImageView imgPlanta;
-    private TextView txtNombre;
-    private TextView txtReino;
-    private TextView txtDivision;
-    private TextView txtClase;
-    private TextView txtOrden;
-    private TextView txtFamilia;
-    private TextView txtGenero;
-    private TextView txtEspecie;
-    private TextView txtAltura;
-    private TextView txtDiametro;
-    private TextView txtCicloRiego;
-    private ImageView imgDondePlantar;
-    private ImageView imgLuminosidad;
-    private TextView txtOtrasRecomendaciones;
-    private TextView txtDescripcion;
-    private TextView txtUltimoCambio;
-    private Button btnActualizar;
-    private RequestManager rm;
+    private EditText edtNombre;
+    private EditText edtNombreAlt;
+    private EditText edtURL;
+    private EditText edtReino;
+    private EditText edtDivision;
+    private EditText edtClase;
+    private EditText edtOrden;
+    private EditText edtFamilia;
+    private EditText edtGenero;
+    private EditText edtEspecie;
+    private EditText edtAlturaVal;
+    private EditText edtAlturaUni;
+    private EditText edtDiametroVal;
+    private EditText edtDiametroUni;
+    private EditText edtCicloRiegoVal;
+    private EditText edtCicloRiegoUni;
+    private RadioButton rbtMaceta;
+    private RadioButton rbtJardin;
+    private RadioButton rbtLuz;
+    private RadioButton rbtMediaSombra;
+    private RadioButton rbtSombra;
+    private EditText edtOtrasRecomendaciones;
+    private EditText edtDescripcion;
 
-    public CargarBaseDatosInformacion(int plantaId, Context context, View view, ImageView imgPlanta, TextView txtNombre, TextView txtReino, TextView txtDivision, TextView txtClase, TextView txtOrden, TextView txtFamilia, TextView txtGenero, TextView txtEspecie, TextView txtAltura, TextView txtDiametro, TextView txtCicloRiego, ImageView imgDondePlantar, ImageView imgLuminosidad, TextView txtOtrasRecomendaciones, TextView txtDescripcion, TextView txtUltimoCambio, Button btnActualizar, RequestManager rm) {
+    public CargarBaseDatosModificar(int plantaId, Context context, View view, Resources resource, ImageView imgPlanta, EditText edtNombre, EditText edtNombreAlt, EditText edtURL, EditText edtReino, EditText edtDivision, EditText edtClase, EditText edtOrden, EditText edtFamilia, EditText edtGenero, EditText edtEspecie, EditText edtAlturaVal, EditText edtAlturaUni, EditText edtDiametroVal, EditText edtDiametroUni, EditText edtCicloRiegoVal, EditText edtCicloRiegoUni, RadioButton rbtMaceta, RadioButton rbtJardin, RadioButton rbtLuz, RadioButton rbtMediaSombra, RadioButton rbtSombra, EditText edtOtrasRecomendaciones, EditText edtDescripcion) {
         this.url = String.format(this.url, this.host, this.port, this.database);
         this.plantaId = plantaId;
         this.context = context;
         this.view = view;
+        this.resource = resource;
         this.imgPlanta = imgPlanta;
-        this.txtNombre = txtNombre;
-        this.txtReino = txtReino;
-        this.txtDivision = txtDivision;
-        this.txtClase = txtClase;
-        this.txtOrden = txtOrden;
-        this.txtFamilia = txtFamilia;
-        this.txtGenero = txtGenero;
-        this.txtEspecie = txtEspecie;
-        this.txtAltura = txtAltura;
-        this.txtDiametro = txtDiametro;
-        this.txtCicloRiego = txtCicloRiego;
-        this.imgDondePlantar = imgDondePlantar;
-        this.imgLuminosidad = imgLuminosidad;
-        this.txtOtrasRecomendaciones = txtOtrasRecomendaciones;
-        this.txtDescripcion = txtDescripcion;
-        this.txtUltimoCambio = txtUltimoCambio;
-        this.btnActualizar = btnActualizar;
-        this.rm = rm;
+        this.edtNombre = edtNombre;
+        this.edtNombreAlt = edtNombreAlt;
+        this.edtURL = edtURL;
+        this.edtReino = edtReino;
+        this.edtDivision = edtDivision;
+        this.edtClase = edtClase;
+        this.edtOrden = edtOrden;
+        this.edtFamilia = edtFamilia;
+        this.edtGenero = edtGenero;
+        this.edtEspecie = edtEspecie;
+        this.edtAlturaVal = edtAlturaVal;
+        this.edtAlturaUni = edtAlturaUni;
+        this.edtDiametroVal = edtDiametroVal;
+        this.edtDiametroUni = edtDiametroUni;
+        this.edtCicloRiegoVal = edtCicloRiegoVal;
+        this.edtCicloRiegoUni = edtCicloRiegoUni;
+        this.rbtMaceta = rbtMaceta;
+        this.rbtJardin = rbtJardin;
+        this.rbtLuz = rbtLuz;
+        this.rbtMediaSombra = rbtMediaSombra;
+        this.rbtSombra = rbtSombra;
+        this.edtOtrasRecomendaciones = edtOtrasRecomendaciones;
+        this.edtDescripcion = edtDescripcion;
         connect();
-
         //this.disconnect();
         System.out.println(" connection status:" + status + " ");
     }
@@ -89,7 +99,6 @@ public class CargarBaseDatosInformacion {
             @Override
             public void run() {
                 try {
-
                     Class.forName("org.postgresql.Driver");
                     connection = DriverManager.getConnection(url, user, pass);
                     status = true;
@@ -99,7 +108,6 @@ public class CargarBaseDatosInformacion {
                     ResultSet result = statement.executeQuery(query);
                     result.next();
                     //int plantaId = result.getInt("plantaId");
-
                     String nombre = result.getString("nombre");
                     String nombreAlt = result.getString("nombreAlt");
                     String imagenURL = result.getString("imagenURL");
@@ -146,28 +154,35 @@ public class CargarBaseDatosInformacion {
                             ultimoUsuario);
 
 
-                    InformacionPlantaFragment.cargar(
+                    ModificarPlantaFragment.cargar(
                             plantasInformacion,
                             context,
                             view,
+                            resource,
                             imgPlanta,
-                            txtNombre,
-                            txtReino,
-                            txtDivision,
-                            txtClase,
-                            txtOrden,
-                            txtFamilia,
-                            txtGenero,
-                            txtEspecie,
-                            txtAltura,
-                            txtDiametro,
-                            txtCicloRiego,
-                            imgDondePlantar,
-                            imgLuminosidad,
-                            txtOtrasRecomendaciones,
-                            txtDescripcion,
-                            txtUltimoCambio,
-                            btnActualizar, rm);
+                            edtNombre,
+                            edtNombreAlt,
+                            edtURL,
+                            edtReino,
+                            edtDivision,
+                            edtClase,
+                            edtOrden,
+                            edtFamilia,
+                            edtGenero,
+                            edtEspecie,
+                            edtAlturaVal,
+                            edtAlturaUni,
+                            edtDiametroVal,
+                            edtDiametroUni,
+                            edtCicloRiegoVal,
+                            edtCicloRiegoUni,
+                            rbtMaceta,
+                            rbtJardin,
+                            rbtLuz,
+                            rbtMediaSombra,
+                            rbtSombra,
+                            edtOtrasRecomendaciones,
+                            edtDescripcion);
                     connection.close();
                 } catch (Exception e) {
                     status = false;
@@ -185,5 +200,4 @@ public class CargarBaseDatosInformacion {
             this.status = false;
         }
     }
-
 }

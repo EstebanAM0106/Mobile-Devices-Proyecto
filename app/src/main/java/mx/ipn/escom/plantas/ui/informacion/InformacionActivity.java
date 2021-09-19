@@ -24,13 +24,14 @@ public class InformacionActivity extends AppCompatActivity {
 
         //Recibe valor de otro Activity
         int idPlanta = (int) this.getIntent().getExtras().getInt("idPlantaA");
-        //Toast.makeText(getApplicationContext(),valor+"",Toast.LENGTH_SHORT).show();
 
         if(idPlanta >= 0){
             getSupportFragmentManager().beginTransaction().add(R.id.containerInformacionId,fragmentInformacion).commit();
             //Envia valor a otro Fragment
             Bundle bundle = new Bundle();
             bundle.putInt("idPlanta", idPlanta);
+
+
             fragmentInformacion.setArguments(bundle);
 
         }else{

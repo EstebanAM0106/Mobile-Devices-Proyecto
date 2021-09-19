@@ -32,15 +32,8 @@
                             android:adjustViewBounds="true"
                             android:contentDescription="TODO"
                             android:foreground="@drawable/inner_shadow"
-                            android:src="@drawable/ic_launcher_background"
+                            android:src="@drawable/loading"
                             tools:ignore="ImageContrastCheck" />
-
-                        <Button
-                            android:id="@+id/infBtnActualizar"
-                            android:layout_width="match_parent"
-                            android:layout_height="wrap_content"
-                            android:layout_weight="1"
-                            tools:ignore="SpeakableTextPresentCheck" />
 
                         <TextView
                             android:id="@+id/infNombre"
@@ -343,18 +336,20 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:layout_gravity="center"
                                     android:text="@string/donde_plantar"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/infDondePlantar"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
                                     android:layout_weight="0"
+                                    android:layout_marginTop="2dp"
                                     android:adjustViewBounds="true"
                                     android:src="@drawable/ic_maceta"
-                                    app:tint="@color/black" />
+                                    app:tint="@color/gray" />
 
                         </LinearLayout>
 
@@ -368,18 +363,20 @@
                                     android:layout_width="wrap_content"
                                     android:layout_height="wrap_content"
                                     android:layout_weight="1"
+                                    android:layout_gravity="center"
                                     android:text="@string/luminosidad"
                                     android:textSize="14sp"
                                     android:textStyle="bold" />
 
                                 <ImageView
                                     android:id="@+id/infLuminosidad"
-                                    android:layout_width="wrap_content"
-                                    android:layout_height="match_parent"
+                                    android:layout_width="35dp"
+                                    android:layout_height="35dp"
                                     android:layout_weight="0"
+                                    android:layout_marginTop="2dp"
                                     android:adjustViewBounds="true"
                                     android:src="@drawable/ic_medio_sol"
-                                    app:tint="@color/black" />
+                                    app:tint="@color/gray" />
 
                         </LinearLayout>
 

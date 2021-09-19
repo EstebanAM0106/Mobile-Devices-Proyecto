@@ -15,7 +15,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import mx.ipn.escom.plantas.Adapter.CargarBaseDatosInicio;
+import mx.ipn.escom.plantas.Database.CargarBaseDatosInicio;
 import mx.ipn.escom.plantas.Adapter.Plantas;
 import mx.ipn.escom.plantas.Adapter.PlantasAdapter;
 import mx.ipn.escom.plantas.R;

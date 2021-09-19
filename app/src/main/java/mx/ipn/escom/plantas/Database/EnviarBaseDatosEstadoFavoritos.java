@@ -1,24 +1,17 @@
-package mx.ipn.escom.plantas.Adapter;
+package mx.ipn.escom.plantas.Database;
 
 
 import android.content.Context;
-
-import androidx.recyclerview.widget.RecyclerView;
+import android.content.res.Resources;
+import android.view.View;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
-import java.util.List;
+import java.sql.PreparedStatement;
 
-import mx.ipn.escom.plantas.Database.Database;
-import mx.ipn.escom.plantas.ui.favoritos.FavoritosFragment;
-
-public class CargarBaseDatosFavoritos {
+public class EnviarBaseDatosEstadoFavoritos {
 
     private Connection connection;
-
     private Database db = new Database();
     // private final String host = "ssprojectinstance.csv2nbvvgbcb.us-east-2.rds.amazonaws.com"  // For Amazon Postgresql
     private final String host = db.getHost();  // For Google Cloud Postgresql
@@ -29,20 +22,24 @@ public class CargarBaseDatosFavoritos {
     private String url = "jdbc:postgresql://%s:%d/%s";
     private boolean status;
 
-
     private Context context;
-    private RecyclerView recyclerView;
-    private List<Plantas> plantasList = new ArrayList<>();
-    private int usuarioID;
-
-    public CargarBaseDatosFavoritos(Context context, RecyclerView recyclerView,int usuarioID) {
+    private View view;
+    private Resources resource;
+    private int idPlanta;
+    private int idUsuario;
+    private Boolean esFavorito;
+    public EnviarBaseDatosEstadoFavoritos(int idPlanta, int idUsuario, Boolean esFavorito) {
         this.url = String.format(this.url, this.host, this.port, this.database);
+        this.idPlanta = idPlanta;
+        this.idUsuario = idUsuario;
+        this.esFavorito = esFavorito;
         this.context = context;
-        this.recyclerView = recyclerView;
-        this.usuarioID = usuarioID;
+        this.view = view;
+        this.resource = resource;
+
         connect();
         //this.disconnect();
-        System.out.println("connection status:" + status + " ");
+        System.out.println(" connection status:" + status + " ");
     }
 
     private void connect() {
@@ -53,21 +50,22 @@ public class CargarBaseDatosFavoritos {
                     Class.forName("org.postgresql.Driver");
                     connection = DriverManager.getConnection(url, user, pass);
                     status = true;
-                    String query = "SELECT * FROM plantas JOIN favoritos ON favoritos.plantaId = plantas.plantaId WHERE favoritos.usuarioId="+usuarioID;
-                    System.out.println("connected:" + status + " ");
+                    if(esFavorito){
+                        PreparedStatement statement = connection.prepareStatement("INSERT INTO " +
+                                "favoritos (usuarioId,plantaId) " +
+                                "VALUES (?,?)" );
+                        statement.setInt(1, idUsuario);
+                        statement.setInt(2, idPlanta);
+                        statement.execute();
+                    }else {
+                        PreparedStatement statement = connection.prepareStatement("DELETE FROM " +
+                                "favoritos "+
+                                "WHERE usuarioId = (?) AND plantaId = (?)");
+                        statement.setInt(1, idUsuario);
+                        statement.setInt(2, idPlanta);
 
-                    Statement statement = connection.createStatement();
-
-                    ResultSet result = statement.executeQuery(query);
-                    while(result.next()){
-                        int plantaId = result.getInt("plantaId");
-                        String nombre = result.getString("nombre");
-                        String nombreAlt = result.getString("nombreAlt");
-                        String imagenURL = result.getString("imagenURL");
-
-                        plantasList.add(new Plantas(plantaId, nombre, nombreAlt, imagenURL,true));
+                        statement.execute();
                     }
-                    FavoritosFragment.cargar(plantasList,context,recyclerView);
                     connection.close();
                 } catch (Exception e) {
                     status = false;
@@ -85,5 +83,4 @@ public class CargarBaseDatosFavoritos {
             this.status = false;
         }
     }
-
 }

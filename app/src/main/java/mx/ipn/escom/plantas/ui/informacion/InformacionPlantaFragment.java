@@ -1,6 +1,9 @@
 package mx.ipn.escom.plantas.ui.informacion;
 
 import android.content.Context;
+import android.content.res.Resources;
+import android.graphics.Bitmap;
+import android.graphics.drawable.Drawable;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -8,27 +11,31 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
 
 import com.bumptech.glide.Glide;
-import com.bumptech.glide.RequestManager;
+import com.bumptech.glide.request.target.CustomTarget;
+import com.bumptech.glide.request.transition.Transition;
 
-import mx.ipn.escom.plantas.Adapter.CargarBaseDatosInformacion;
+import mx.ipn.escom.plantas.Database.CargarBaseDatosInformacion;
 import mx.ipn.escom.plantas.Adapter.PlantasInformacion;
 import mx.ipn.escom.plantas.R;
 import mx.ipn.escom.plantas.databinding.FragmentInformacionPlantaBinding;
 
-public class InformacionPlantaFragment extends Fragment {
+public class InformacionPlantaFragment extends Fragment  implements View.OnClickListener {
     FragmentInformacionPlantaBinding binding;
     Button btnModificar;
 
 
     FragmentTransaction transaction;
     Fragment fragmentInformacion,fragmentModificar;
-
 
     public InformacionPlantaFragment() {
         // Required empty public constructor
@@ -47,6 +54,7 @@ public class InformacionPlantaFragment extends Fragment {
         View root = binding.getRoot();
         //root=inflater.inflate(R.layout.fragment_informacion_planta, container, false);
 
+        ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_informacion);
         //Recibir valor
         int idPlanta = getArguments().getInt("idPlanta");
         inicializarElementos(root,idPlanta,requireContext());
@@ -72,22 +80,8 @@ public class InformacionPlantaFragment extends Fragment {
         TextView txtOtrasRecomendaciones = (TextView) view.findViewById(R.id.infOtrasRecomendaciones);
         TextView txtDescripcion = (TextView) view.findViewById(R.id.infDescripcion);
         TextView txtUltimoCambio = (TextView) view.findViewById(R.id.infUltimoCambio);
-        RequestManager rm = Glide.with(context);
-
-        Button btnActualizar = (Button) view.findViewById(R.id.infBtnActualizar);
-        btnActualizar.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //Toast.makeText(context," hola asinoes", Toast.LENGTH_SHORT).show();
-                Glide.with(context).load(btnActualizar.getText().toString())
-                        .placeholder(R.drawable.loading)
-                        .centerCrop()
-                        .into(imgPlanta);
-            }
-        });
-
         CargarBaseDatosInformacion bd =  new CargarBaseDatosInformacion(
-                idPlanta,context,view,
+                idPlanta, context, view, getResources(),
                 imgPlanta,
                 txtNombre,
                 txtReino,
@@ -104,11 +98,8 @@ public class InformacionPlantaFragment extends Fragment {
                 imgLuminosidad,
                 txtOtrasRecomendaciones,
                 txtDescripcion,
-                txtUltimoCambio,
-                btnActualizar,
-                rm);
+                txtUltimoCambio);
 
-        //Toast.makeText(context,idPlanta+" yoh", Toast.LENGTH_SHORT).show();
 
 
 
@@ -127,12 +118,9 @@ public class InformacionPlantaFragment extends Fragment {
             }
         });
 
-
     }
 
-    public static void cargar(PlantasInformacion plantasInformacion,
-                              Context context,
-                              View view,
+    public static void cargar(PlantasInformacion plantasInformacion, Context context, View view, Resources resources,
                               ImageView imgPlanta,
                               TextView txtNombre,
                               TextView txtReino,
@@ -149,13 +137,13 @@ public class InformacionPlantaFragment extends Fragment {
                               ImageView imgLuminosidad,
                               TextView txtOtrasRecomendaciones,
                               TextView txtDescripcion,
-                              TextView txtUltimoCambio,
-                              Button btnActualizar,
-                              RequestManager rm) {
-
-        //Toast.makeText(context,"cargar "+plantaId, Toast.LENGTH_SHORT).show();
-        //Toast.makeText(context,"encargar", Toast.LENGTH_SHORT).show();;
-        txtNombre.setText(plantasInformacion.getNombre());
+                              TextView txtUltimoCambio) {
+        if(plantasInformacion.getNombreAlt() == "" || plantasInformacion.getNombreAlt() == " " || plantasInformacion.getNombreAlt() == null)
+        {
+            txtNombre.setText(plantasInformacion.getNombre());
+        }else{
+            txtNombre.setText(plantasInformacion.getNombre() + " (" + plantasInformacion.getNombreAlt() + ")");
+        }
         txtReino.setText(plantasInformacion.getReino());
         txtDivision.setText(plantasInformacion.getDivision());
         txtClase.setText(plantasInformacion.getClase());
@@ -169,11 +157,12 @@ public class InformacionPlantaFragment extends Fragment {
         txtOtrasRecomendaciones.setText(plantasInformacion.getOtrasRecomendaciones());
         txtDescripcion.setText(plantasInformacion.getDescripcion());
         txtUltimoCambio.setText("Última edición: "+plantasInformacion.getUltimoUsuario());
-        if(plantasInformacion.getEsMaceta()){
+        /*if(plantasInformacion.getEsMaceta()){
             imgDondePlantar.setImageResource(R.drawable.ic_maceta);
         }else{
             imgDondePlantar.setImageResource(R.drawable.ic_jardin);
-        }
+        }*/
+        imgDondePlantar.setImageResource(plantasInformacion.getEsMaceta()?R.drawable.ic_maceta:R.drawable.ic_jardin);
         if(plantasInformacion.getLuminosidad()==0){
             imgLuminosidad.setImageResource(R.drawable.ic_luna);
             imgLuminosidad.setColorFilter(ContextCompat.getColor(context,R.color.sombra_color));
@@ -185,16 +174,62 @@ public class InformacionPlantaFragment extends Fragment {
             imgLuminosidad.setImageResource(R.drawable.ic_sol);
             imgLuminosidad.setColorFilter(ContextCompat.getColor(context,R.color.sol_color));
         }
-        btnActualizar.setText(plantasInformacion.getImagenURL());/*
-        btnActualizar.performContextClick();
-        btnActualizar.performClick();
-        btnActualizar.callOnClick();*/
-        //workerThread(context,imgPlanta, plantasInformacion.getImagenURL());
-
-
-
-
+        imgPlanta.setImageDrawable(resources.getDrawable(R.drawable.error, context.getTheme()));
+        Glide.with(context)
+                .asBitmap()
+                .load(plantasInformacion.getImagenURL())
+                .placeholder(R.drawable.loading)
+                .centerCrop()
+                .into(new CustomTarget<Bitmap>() {
+            @Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                int width  = resource.getWidth();
+                int height = resource.getHeight();
+                int newWidth = (height > width) ? width : height;
+                int newHeight = (height > width)? width : height;
+                int cropW = (width - height) / 2;
+                cropW = (cropW < 0)? 0: cropW;
+                int cropH = (height - width) / 2;
+                cropH = (cropH < 0)? 0: cropH;
+                Bitmap cropImg = Bitmap.createBitmap(resource, cropW, cropH, newWidth, newHeight);
+                /*int cropH = (height - width) / 2 * (3 / 2);
+                cropH = (cropH < 0)? 0: cropH;
+                Bitmap cropImg = Bitmap.createBitmap(resource, cropW, cropH, newWidth, newHeight*2/3);*/
+                imgPlanta.setImageBitmap(cropImg);
+            }
+            /*@Override
+            public void onResourceReady(@NonNull Bitmap resource, @Nullable Transition<? super Bitmap> transition) {
+                imgPlanta.setImageBitmap(resource);
+            }*/
+            @Override
+            public void onLoadCleared(@Nullable Drawable placeholder) {
+                imgPlanta.setImageDrawable(placeholder);
+            }
+        });
+        imgDondePlantar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (plantasInformacion.getEsMaceta())
+                    Toast.makeText(context, resources.getText(R.string.maceta), Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(context, resources.getText(R.string.jardinera), Toast.LENGTH_SHORT).show();
+            }
+        });
+        imgLuminosidad.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (plantasInformacion.getLuminosidad() == 2)
+                    Toast.makeText(context, resources.getText(R.string.luz), Toast.LENGTH_SHORT).show();
+                else if (plantasInformacion.getLuminosidad() == 1)
+                    Toast.makeText(context, resources.getText(R.string.media_sombra), Toast.LENGTH_SHORT).show();
+                else
+                    Toast.makeText(context, resources.getText(R.string.sombra), Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 
+    @Override
+    public void onClick(View view) {
 
+    }
 }

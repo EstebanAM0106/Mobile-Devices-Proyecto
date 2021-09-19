@@ -1,5 +1,6 @@
 package mx.ipn.escom.plantas.Adapter;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.content.Intent;
 import android.text.TextUtils;
@@ -9,6 +10,7 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -17,6 +19,7 @@ import com.bumptech.glide.Glide;
 
 import java.util.List;
 
+import mx.ipn.escom.plantas.Database.EnviarBaseDatosEstadoFavoritos;
 import mx.ipn.escom.plantas.R;
 import mx.ipn.escom.plantas.ui.informacion.InformacionActivity;
 
@@ -37,7 +40,7 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.ViewHold
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ViewHolder holder, @SuppressLint("RecyclerView") int position) {
         String nombreTemp = plantasList.get(position).getNombre();
         String nombreAltTemp = plantasList.get(position).getNombreAlt();
         if(nombreAltTemp == "" || nombreAltTemp == " "|| nombreAltTemp == null) {
@@ -51,8 +54,10 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.ViewHold
         holder.txtNombre.setSelected(true);
         Glide.with(context).load(plantasList.get(position).getImagenURL())
                 .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
                 .centerCrop()
                 .into(holder.imgPlanta);
+
         if(plantasList.get(position).getEsFavorito() == true){
             holder.btnStar.setImageResource(R.drawable.ic_star);
         }else{
@@ -64,12 +69,17 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 if(plantasList.get(position).getEsFavorito()==false){
+                    new EnviarBaseDatosEstadoFavoritos(plantasList.get(position).getId(),1,true);
                     holder.btnStar.setImageResource(R.drawable.ic_star);
                     plantasList.get(position).setEsFavorito(true);
+                    Toast.makeText(context,context.getResources().getText(R.string.agregado_favoritos), Toast.LENGTH_SHORT).show();
+
 
                 }else{
+                    new EnviarBaseDatosEstadoFavoritos(plantasList.get(position).getId(),1,false);
                     holder.btnStar.setImageResource(R.drawable.ic_empty_star);
                     plantasList.get(position).setEsFavorito(false);
+                    Toast.makeText(context,context.getResources().getText(R.string.eliminado_favoritos), Toast.LENGTH_SHORT).show();
                 }
 
             }

@@ -9,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.List;
 
-import mx.ipn.escom.plantas.Adapter.CargarBaseDatosResultados;
+import mx.ipn.escom.plantas.Database.CargarBaseDatosResultados;
 import mx.ipn.escom.plantas.Adapter.Plantas;
 import mx.ipn.escom.plantas.Adapter.PlantasAdapter;
 import mx.ipn.escom.plantas.R;
