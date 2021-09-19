@@ -24,6 +24,9 @@ public class ResultadosActivity extends AppCompatActivity {
         setContentView(R.layout.activity_resultados);
         String frase = getIntent().getStringExtra("Frase");
         getSupportActionBar().setTitle("Resultados: "+frase);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+        getSupportActionBar().setDisplayShowHomeEnabled(true);
         inicializarElementos(frase);
 
 
@@ -43,5 +46,16 @@ public class ResultadosActivity extends AppCompatActivity {
         PlantasAdapter plantasAdapter = new PlantasAdapter(plantasList,context);
         recyclerPlantas.setAdapter(plantasAdapter);
     }
+    @Override
+    public void onBackPressed()
+    {
+        this.finish();
+        // code here to check what fragment you are on and handle that accordingly
+        super.onBackPressed();  // this exits the app.
 
+    }
+    public boolean onSupportNavigateUp() {
+        onBackPressed();
+        return true;
+    }
 }

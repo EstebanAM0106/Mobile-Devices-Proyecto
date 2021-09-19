@@ -28,14 +28,14 @@ import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.request.target.CustomTarget;
 import com.bumptech.glide.request.transition.Transition;
 
+import mx.ipn.escom.plantas.Adapter.PlantasInformacion;
 import mx.ipn.escom.plantas.Database.CargarBaseDatosModificar;
 import mx.ipn.escom.plantas.Database.EnviarBaseDatosModificar;
-import mx.ipn.escom.plantas.Adapter.PlantasInformacion;
 import mx.ipn.escom.plantas.R;
 import mx.ipn.escom.plantas.databinding.FragmentModificarPlantaBinding;
 
 
-public class ModificarPlantaFragment extends Fragment implements View.OnClickListener {
+public class ModificarPlantaFragment extends Fragment implements View.OnClickListener{
     FragmentModificarPlantaBinding binding;
     Button btnGuardar;
     Button btnActualizar;
@@ -213,7 +213,7 @@ public class ModificarPlantaFragment extends Fragment implements View.OnClickLis
                         Bundle bundle = new Bundle();
                         bundle.putInt("idPlanta", idPlanta);
                         fragmentInformacion.setArguments(bundle);
-                        transaction.replace(R.id.containerInformacionId, fragmentInformacion).commit();
+                        transaction.replace(R.id.containerInformacionId, fragmentInformacion,"F_INFORMACION").commit();
 
                     }else {
                         Toast.makeText(getContext(),errors+"", Toast.LENGTH_SHORT).show();
@@ -255,8 +255,10 @@ public class ModificarPlantaFragment extends Fragment implements View.OnClickLis
                         .into(imgPlanta);
             }
         });
+
         if(idPlanta>=0) {
             ((AppCompatActivity) getActivity()).getSupportActionBar().setTitle(R.string.title_modificar);
+
             inicializarElementos(root, idPlanta, getContext(),
                     imgPlanta,
                     edtNombre,
@@ -411,4 +413,5 @@ public class ModificarPlantaFragment extends Fragment implements View.OnClickLis
 
                 });
     }
+
 }

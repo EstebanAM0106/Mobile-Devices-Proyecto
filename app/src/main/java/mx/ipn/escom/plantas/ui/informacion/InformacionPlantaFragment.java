@@ -53,7 +53,6 @@ public class InformacionPlantaFragment extends Fragment  implements View.OnClick
         binding = FragmentInformacionPlantaBinding.inflate(inflater, container, false);
         View root = binding.getRoot();
         //root=inflater.inflate(R.layout.fragment_informacion_planta, container, false);
-
         ((AppCompatActivity)getActivity()).getSupportActionBar().setTitle(R.string.title_informacion);
         //Recibir valor
         int idPlanta = getArguments().getInt("idPlanta");
@@ -114,7 +113,7 @@ public class InformacionPlantaFragment extends Fragment  implements View.OnClick
                 Bundle bundle = new Bundle();
                 bundle.putInt("idPlanta", idPlanta);
                 fragmentModificar.setArguments(bundle);
-                transaction.replace(R.id.containerInformacionId,fragmentModificar).commit();
+                transaction.replace(R.id.containerInformacionId,fragmentModificar,"F_MODIFICAR").commit();
             }
         });
 
@@ -137,7 +136,8 @@ public class InformacionPlantaFragment extends Fragment  implements View.OnClick
                               ImageView imgLuminosidad,
                               TextView txtOtrasRecomendaciones,
                               TextView txtDescripcion,
-                              TextView txtUltimoCambio) {
+                              TextView txtUltimoCambio,
+                              String ultimoUsuarioNombre) {
         if(plantasInformacion.getNombreAlt() == "" || plantasInformacion.getNombreAlt() == " " || plantasInformacion.getNombreAlt() == null)
         {
             txtNombre.setText(plantasInformacion.getNombre());
@@ -156,7 +156,7 @@ public class InformacionPlantaFragment extends Fragment  implements View.OnClick
         txtCicloRiego.setText(plantasInformacion.getCicloRiego()+" "+plantasInformacion.getCicloRiegoUnidad());
         txtOtrasRecomendaciones.setText(plantasInformacion.getOtrasRecomendaciones());
         txtDescripcion.setText(plantasInformacion.getDescripcion());
-        txtUltimoCambio.setText("Última edición: "+plantasInformacion.getUltimoUsuario());
+        txtUltimoCambio.setText(resources.getText(R.string.ultima_edicion)+" "+ultimoUsuarioNombre);
         /*if(plantasInformacion.getEsMaceta()){
             imgDondePlantar.setImageResource(R.drawable.ic_maceta);
         }else{

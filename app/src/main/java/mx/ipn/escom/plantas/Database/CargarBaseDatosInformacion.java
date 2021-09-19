@@ -137,7 +137,11 @@ public class CargarBaseDatosInformacion {
                             otrasRecomendaciones,
                             descripcion,
                             ultimoUsuario);
-
+                    String query2 = "SELECT nombre FROM usuarios WHERE usuarioId = "+ultimoUsuario;
+                    Statement statement2 = connection.createStatement();
+                    ResultSet result2 = statement2.executeQuery(query2);
+                    result2.next();
+                    String ultimoUsuarioNombre = result2.getString("nombre");
 
                     InformacionPlantaFragment.cargar(
                             plantasInformacion,
@@ -160,7 +164,8 @@ public class CargarBaseDatosInformacion {
                             imgLuminosidad,
                             txtOtrasRecomendaciones,
                             txtDescripcion,
-                            txtUltimoCambio);
+                            txtUltimoCambio,
+                            ultimoUsuarioNombre);
                     connection.close();
                 } catch (Exception e) {
                     status = false;
