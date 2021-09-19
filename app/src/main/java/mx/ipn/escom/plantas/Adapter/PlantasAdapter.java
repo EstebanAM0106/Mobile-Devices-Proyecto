@@ -51,8 +51,10 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.ViewHold
         holder.txtNombre.setSelected(true);
         Glide.with(context).load(plantasList.get(position).getImagenURL())
                 .placeholder(R.drawable.loading)
+                .error(R.drawable.error)
                 .centerCrop()
                 .into(holder.imgPlanta);
+
         if(plantasList.get(position).getEsFavorito() == true){
             holder.btnStar.setImageResource(R.drawable.ic_star);
         }else{

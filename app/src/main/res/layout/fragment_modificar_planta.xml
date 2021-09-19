@@ -88,7 +88,7 @@
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:orientation="vertical">
 
                     <EditText
                         android:id="@+id/modUrlImg"
@@ -103,11 +103,11 @@
                         android:imeOptions="actionDone"/>
 
                     <Button
-                        android:id="@+id/modBtnActualizar"
-                        android:layout_width="wrap_content"
-                        android:layout_height="match_parent"
+                        android:id="@+id/modBtnRecargar"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
                         android:layout_weight="0"
-                        android:text="@string/boton_actualizar" />
+                        android:text="@string/boton_recargar_imagen" />
                 </LinearLayout>
                 <ImageView
                     android:id="@+id/modImgId"
@@ -120,7 +120,7 @@
                     android:adjustViewBounds="true"
                     android:contentDescription="TODO"
                     android:foreground="@drawable/inner_shadow"
-                    android:src="@drawable/ic_launcher_background"
+                    android:src="@drawable/loading"
                     tools:ignore="ImageContrastCheck" />
 
             </LinearLayout>
@@ -476,14 +476,16 @@
                         android:layout_weight="1"
                         android:backgroundTintMode="src_in"
                         android:checked="true"
-                        android:drawableStart="@drawable/ic_maceta" />
+                        android:drawableStart="@drawable/ic_maceta"
+                        android:drawableTint="@color/gray"/>
 
                     <RadioButton
                         android:id="@+id/modJardin"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:drawableStart="@drawable/ic_jardin" />
+                        android:drawableStart="@drawable/ic_jardin"
+                        android:drawableTint="@color/gray"/>
                 </RadioGroup>
 
             </LinearLayout>
@@ -584,7 +586,7 @@
                 android:orientation="vertical">
 
                 <EditText
-                    android:id="@+id/editTextTextMultiLine2"
+                    android:id="@+id/modDescripcion"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:ems="10"

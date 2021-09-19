@@ -3,6 +3,9 @@
     <string name="title_inicio">Inicio</string>
     <string name="title_favoritos">Mis plantas</string>
     <string name="title_busqueda">Buscar</string>
+    <string name="title_informacion">Información de la planta</string>
+    <string name="title_modificar">Modificar información</string>
+    <string name="title_agregar">Agregar nueva planta</string>
     <string name="boton_buscar">Buscar</string>
     <string name="barra_busqueda">Escriba el nombre, especie, ...</string>
     <string name="error_barra_busqueda">Escriba el nombre, especie, ...</string>
@@ -34,8 +37,9 @@
     <string name="boton_modificar">Editar información</string>
     <string name="ultima_edicion">Último cambio:</string>
 
-    <string name="boton_actualizar">Actualizar</string>
+    <string name="boton_recargar_imagen">Recargar imagen</string>
     <string name="boton_guardar">Guardar cambios</string>
+    <string name="boton_agregar">Agregar nueva planta</string>
 
     <string name="default_otras_recomendaciones">Su dieta se complementa con...</string>
     <string name="default_descricpión">Esta especie proviende de...</string>

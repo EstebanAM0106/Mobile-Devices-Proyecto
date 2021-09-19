@@ -29,7 +29,6 @@ public class CargarBaseDatosFavoritos {
     private String url = "jdbc:postgresql://%s:%d/%s";
     private boolean status;
 
-
     private Context context;
     private RecyclerView recyclerView;
     private List<Plantas> plantasList = new ArrayList<>();

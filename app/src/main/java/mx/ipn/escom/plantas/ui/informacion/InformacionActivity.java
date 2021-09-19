@@ -31,6 +31,8 @@ public class InformacionActivity extends AppCompatActivity {
             //Envia valor a otro Fragment
             Bundle bundle = new Bundle();
             bundle.putInt("idPlanta", idPlanta);
+
+
             fragmentInformacion.setArguments(bundle);
 
         }else{
