@@ -11,7 +11,7 @@
     <string name="error_barra_busqueda">Escriba el nombre, especie, ...</string>
     <string name="datos_basicos">Datos básicos</string>
     <string name="nombre">Nombre Popular</string>
-    <string name="nombre_alternativo">Nombre Real</string>
+    <string name="nombre_alternativo">Nombre Alternativo</string>
     <string name="url_imagen">URL de la imágen</string>
     <string name="taxonomia">Taxonomía</string>
     <string name="reino">Reino</string>

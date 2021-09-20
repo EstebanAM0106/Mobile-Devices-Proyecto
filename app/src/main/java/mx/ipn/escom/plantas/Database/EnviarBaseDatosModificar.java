@@ -72,8 +72,8 @@ public class EnviarBaseDatosModificar {
                                 "otrasRecomendaciones = (?), " +
                                 "descripcion = (?), " +
                                 "ultimoUsuario = (?) " +
-                                "WHERE plantaId = "//+plantasInformacion.getId());
-                                +(int)Math.floor(Math.random()*(3-1+1)+1));
+                                "WHERE plantaId = "+plantasInformacion.getId());
+
                         statement.setString(1, plantasInformacion.getNombre());
                         statement.setString(2, plantasInformacion.getNombreAlt());
                         statement.setString(3, plantasInformacion.getImagenURL());
@@ -94,7 +94,8 @@ public class EnviarBaseDatosModificar {
                         statement.setInt(18, plantasInformacion.getLuminosidad());
                         statement.setString(19, plantasInformacion.getOtrasRecomendaciones());
                         statement.setString(20, plantasInformacion.getDescripcion());
-                        statement.setInt(21, plantasInformacion.getUltimoUsuario());
+                        //statement.setInt(21, plantasInformacion.getUltimoUsuario());
+                        statement.setInt(21, (int)Math.floor(Math.random()*(3-1+1)+1));
                         statement.execute();
                     }else {
                         PreparedStatement statement = connection.prepareStatement("INSERT INTO " +

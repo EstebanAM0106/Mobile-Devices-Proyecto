@@ -69,17 +69,17 @@ public class PlantasAdapter extends RecyclerView.Adapter<PlantasAdapter.ViewHold
             @Override
             public void onClick(View view) {
                 if(plantasList.get(position).getEsFavorito()==false){
-                    new EnviarBaseDatosEstadoFavoritos(plantasList.get(position).getId(),1,true);
                     holder.btnStar.setImageResource(R.drawable.ic_star);
                     plantasList.get(position).setEsFavorito(true);
                     Toast.makeText(context,context.getResources().getText(R.string.agregado_favoritos), Toast.LENGTH_SHORT).show();
+                    new EnviarBaseDatosEstadoFavoritos(plantasList.get(position).getId(),1,true);
 
 
                 }else{
-                    new EnviarBaseDatosEstadoFavoritos(plantasList.get(position).getId(),1,false);
                     holder.btnStar.setImageResource(R.drawable.ic_empty_star);
                     plantasList.get(position).setEsFavorito(false);
                     Toast.makeText(context,context.getResources().getText(R.string.eliminado_favoritos), Toast.LENGTH_SHORT).show();
+                    new EnviarBaseDatosEstadoFavoritos(plantasList.get(position).getId(),1,false);
                 }
 
             }
