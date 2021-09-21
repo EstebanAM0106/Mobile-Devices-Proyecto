@@ -54,7 +54,7 @@ public class CargarBaseDatosResultados {
                     Class.forName("org.postgresql.Driver");
                     connection = DriverManager.getConnection(url, user, pass);
                     status = true;
-                    String query = "SELECT * FROM plantas WHERE plantaid IN (SELECT plantaid FROM plantas WHERE (LOWER(nombre) LIKE '%"+frase+"%') or (LOWER(nombreAlt) LIKE '%"+frase+"%') or (LOWER(especie) LIKE '%"+frase+"%'))";
+                    String query = "SELECT * FROM plantas WHERE plantaid IN (SELECT plantaid FROM plantas WHERE  (LOWER(nombre) LIKE '%"+frase+"%')  or (LOWER(nombreAlt) LIKE '%"+frase+"%')  or (LOWER(especie) LIKE '%"+frase+"%') or (LOWER(genero) LIKE '%"+frase+"%') or (LOWER(familia) LIKE '%"+frase+"%') or (LOWER(orden) LIKE '%"+frase+"%') or (LOWER(clase) LIKE '%"+frase+"%') or (LOWER(division) LIKE '%"+frase+"%'))";
                     String query2;
                     System.out.println("connected:" + status + " ");
 
